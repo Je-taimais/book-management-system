@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shanzhu.book.mapper.BorrowMapper">
+
+  <resultMap id="BaseResultMap" type="com.shanzhu.book.model.Borrow">
+    <id column="borrowId" jdbcType="INTEGER" property="borrowid" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="bookId" jdbcType="INTEGER" property="bookid" />
+    <result column="bookName" jdbcType="VARCHAR" property="bookname" />
+    <result column="borrowTime" jdbcType="TIMESTAMP" property="borrowtime" />
+    <result column="returnTime" jdbcType="TIMESTAMP" property="returntime" />
+    <result column="dueDate" jdbcType="TIMESTAMP" property="duedate" />
+    <result column="isOverdue" jdbcType="TINYINT" property="isoverdue" />
+    <result column="overdueDays" jdbcType="INTEGER" property="overduedays" />
+    <result column="fine" jdbcType="DECIMAL" property="fine" />
+    <result column="renewCount" jdbcType="INTEGER" property="renewcount" />
+    <result column="lastRenewTime" jdbcType="TIMESTAMP" property="lastrenewwtime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    borrowId, userId, bookId, borrowTime, returnTime, dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from borrow
+    where borrowId = #{borrowid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from borrow
+    where borrowId = #{borrowid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.shanzhu.book.model.Borrow">
+    insert into borrow (borrowId, userId, bookId, 
+      borrowTime, returnTime, dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime)
+    values (#{borrowid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{bookid,jdbcType=INTEGER}, 
+      #{borrowtime,jdbcType=TIMESTAMP}, #{returntime,jdbcType=TIMESTAMP},
+      #{duedate,jdbcType=TIMESTAMP}, #{isoverdue,jdbcType=TINYINT},
+      #{overduedays,jdbcType=INTEGER}, #{fine,jdbcType=DECIMAL},
+      #{renewcount,jdbcType=INTEGER}, #{lastrenewwtime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.shanzhu.book.model.Borrow">
+    insert into borrow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="borrowid != null">
+        borrowId,
+      </if>
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="bookid != null">
+        bookId,
+      </if>
+      <if test="borrowtime != null">
+        borrowTime,
+      </if>
+      <if test="returntime != null">
+        returnTime,
+      </if>
+      <if test="duedate != null">
+        dueDate,
+      </if>
+      <if test="isoverdue != null">
+        isOverdue,
+      </if>
+      <if test="overduedays != null">
+        overdueDays,
+      </if>
+      <if test="fine != null">
+        fine,
+      </if>
+      <if test="renewcount != null">
+        renewCount,
+      </if>
+      <if test="lastrenewwtime != null">
+        lastRenewTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="borrowid != null">
+        #{borrowid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="bookid != null">
+        #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="borrowtime != null">
+        #{borrowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntime != null">
+        #{returntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duedate != null">
+        #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isoverdue != null">
+        #{isoverdue,jdbcType=TINYINT},
+      </if>
+      <if test="overduedays != null">
+        #{overduedays,jdbcType=INTEGER},
+      </if>
+      <if test="fine != null">
+        #{fine,jdbcType=DECIMAL},
+      </if>
+      <if test="renewcount != null">
+        #{renewcount,jdbcType=INTEGER},
+      </if>
+      <if test="lastrenewwtime != null">
+        #{lastrenewwtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.shanzhu.book.model.Borrow">
+    update borrow
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="bookid != null">
+        bookId = #{bookid,jdbcType=INTEGER},
+      </if>
+      <if test="borrowtime != null">
+        borrowTime = #{borrowtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntime != null">
+        returnTime = #{returntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duedate != null">
+        dueDate = #{duedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isoverdue != null">
+        isOverdue = #{isoverdue,jdbcType=TINYINT},
+      </if>
+      <if test="overduedays != null">
+        overdueDays = #{overduedays,jdbcType=INTEGER},
+      </if>
+      <if test="fine != null">
+        fine = #{fine,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where borrowId = #{borrowid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.shanzhu.book.model.Borrow">
+    update borrow
+    set userId = #{userid,jdbcType=INTEGER},
+      bookId = #{bookid,jdbcType=INTEGER},
+      borrowTime = #{borrowtime,jdbcType=TIMESTAMP},
+      returnTime = #{returntime,jdbcType=TIMESTAMP},
+      dueDate = #{duedate,jdbcType=TIMESTAMP},
+      isOverdue = #{isoverdue,jdbcType=TINYINT},
+      overdueDays = #{overduedays,jdbcType=INTEGER},
+      fine = #{fine,jdbcType=DECIMAL},
+      renewCount = #{renewcount,jdbcType=INTEGER},
+      lastRenewTime = #{lastrenewwtime,jdbcType=TIMESTAMP}
+    where borrowId = #{borrowid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllByLimit" resultMap="BaseResultMap">
+    select borrowId, userId, bookId, borrowTime, returnTime, dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime,
+           (select userName from user where borrow.userId = user.userId) userName,
+           (select bookName from book_info where borrow.bookId = book_info.bookId) bookName
+    from borrow
+    limit #{begin}, #{size}
+  </select>
+
+  <select id="selectCount" resultType="int">
+    select count(*) from borrow
+  </select>
+
+  <select id="selectCountBySearch" resultType="int">
+    select count(*)
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    <if test="bookId != null and bookId != '' ">
+      and borrow.bookId like concat('%',#{bookId},'%')
+    </if>
+    <if test="username != null and username != '' ">
+      and userName like concat('%',#{username},'%')
+    </if>
+    <if test="bookname != null and bookname != '' ">
+      and bookName like concat('%',#{bookname},'%')
+    </if>
+    <if test="userid != null and userid != '' ">
+      and borrow.userId = #{userid}
+    </if>
+  </select>
+
+  <select id="selectBySearch" resultMap="BaseResultMap">
+    select borrowId, borrow.userId, borrow.bookId, borrowTime, returnTime,
+           dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime, userName, bookName
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    <if test="username != null and username != '' ">
+      and userName like concat('%',#{username},'%')
+    </if>
+    <if test="bookname != null and bookname != '' ">
+      and bookName like concat('%',#{bookname},'%')
+    </if>
+    <if test="userid != null and userid != '' ">
+      and borrow.userId = #{userid}
+    </if>
+    limit #{begin}, #{size}
+  </select>
+
+  <select id="selectCountByReader" resultType="int">
+    select count(*) from borrow
+    where userId = #{userid}
+  </select>
+
+  <select id="selectAllByLimitByReader" resultMap="BaseResultMap">
+    select borrowId, userId, bookId, borrowTime, returnTime, dueDate, isOverdue, overdueDays, fine,
+           (select userName from user where borrow.userId = user.userId) userName,
+           (select bookName from book_info where borrow.bookId = book_info.bookId) bookName
+    from borrow
+    where userId = #{userid}
+    limit #{begin}, #{size}
+  </select>
+
+  <!-- ============ 逾期相关查询 ============ -->
+
+  <select id="selectCountOverdue" resultType="int">
+    select count(*)
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    and borrow.isOverdue = 1
+    <if test="username != null and username != '' ">
+      and userName like concat('%',#{username},'%')
+    </if>
+    <if test="bookname != null and bookname != '' ">
+      and bookName like concat('%',#{bookname},'%')
+    </if>
+  </select>
+
+  <select id="selectOverdueByPage" resultMap="BaseResultMap">
+    select borrowId, borrow.userId, borrow.bookId, borrowTime, returnTime,
+           dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime, userName, bookName
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    and borrow.isOverdue = 1
+    <if test="username != null and username != '' ">
+      and userName like concat('%',#{username},'%')
+    </if>
+    <if test="bookname != null and bookname != '' ">
+      and bookName like concat('%',#{bookname},'%')
+    </if>
+    limit #{begin}, #{size}
+  </select>
+
+  <select id="selectCurrentOverdue" resultMap="BaseResultMap">
+    select borrowId, borrow.userId, borrow.bookId, borrowTime, returnTime,
+           dueDate, isOverdue, overdueDays, fine, userName, bookName
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    and borrow.returnTime IS NULL
+    and borrow.dueDate &lt; NOW()
+  </select>
+
+  <select id="selectOverdueStatistics" resultType="java.util.HashMap">
+    select
+      (select count(*) from borrow where returnTime IS NULL and dueDate &lt; NOW()) as currentOverdueCount,
+      (select count(*) from borrow where isOverdue = 1) as totalOverdueCount,
+      (select IFNULL(sum(fine), 0) from borrow where isOverdue = 1) as totalFine
+  </select>
+
+  <!-- ============ 逾期状态自动更新 ============ -->
+
+  <update id="updateOverdueStatus">
+    UPDATE borrow
+    SET isOverdue = 1,
+        overdueDays = TIMESTAMPDIFF(DAY, dueDate, NOW()),
+        fine = TIMESTAMPDIFF(DAY, dueDate, NOW()) * 0.5
+    WHERE returnTime IS NULL
+      AND dueDate IS NOT NULL
+      AND dueDate &lt; NOW()
+      AND isOverdue = 0
+  </update>
+
+  <!-- ============ 续借与借书资格相关 ============ -->
+
+  <update id="updateRenew">
+    update borrow
+    set renewCount = #{renewcount,jdbcType=INTEGER},
+        dueDate = #{duedate,jdbcType=TIMESTAMP},
+        lastRenewTime = #{lastrenewwtime,jdbcType=TIMESTAMP}
+    where borrowId = #{borrowid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectUserOverdueUnreturned" resultMap="BaseResultMap">
+    select borrowId, borrow.userId, borrow.bookId, borrowTime, returnTime,
+           dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime, userName, bookName
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    and borrow.userId = #{userid}
+    and borrow.returnTime IS NULL
+    and borrow.dueDate &lt; NOW()
+  </select>
+
+  <select id="selectUserUnpaidOverdue" resultMap="BaseResultMap">
+    select borrowId, borrow.userId, borrow.bookId, borrowTime, returnTime,
+           dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime, userName, bookName
+    from borrow, user, book_info
+    where borrow.userId = user.userId and borrow.bookId = book_info.bookId
+    and borrow.userId = #{userid}
+    and borrow.isOverdue = 1
+    and borrow.borrowId NOT IN (select borrowId from payment)
+  </select>
+
+  <select id="selectActiveBorrowByUserAndBook" resultMap="BaseResultMap">
+    select borrowId, userId, bookId, borrowTime, returnTime, dueDate, isOverdue, overdueDays, fine, renewCount, lastRenewTime
+    from borrow
+    where userId = #{userid} and bookId = #{bookid} and returnTime IS NULL
+    limit 1
+  </select>
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shanzhu.book.mapper.PaymentMapper">
+
+    <resultMap id="BaseResultMap" type="com.shanzhu.book.model.Payment">
+        <id column="paymentId" jdbcType="INTEGER" property="paymentid" />
+        <result column="borrowId" jdbcType="INTEGER" property="borrowid" />
+        <result column="userId" jdbcType="INTEGER" property="userid" />
+        <result column="amount" jdbcType="DECIMAL" property="amount" />
+        <result column="paymentTime" jdbcType="TIMESTAMP" property="paymenttime" />
+        <result column="paymentType" jdbcType="TINYINT" property="paymenttype" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        paymentId, borrowId, userId, amount, paymentTime, paymentType, remark
+    </sql>
+
+    <insert id="insert" parameterType="com.shanzhu.book.model.Payment" useGeneratedKeys="true" keyProperty="paymentid">
+        insert into payment (borrowId, userId, amount, paymentTime, paymentType, remark)
+        values (#{borrowid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER},
+                #{amount,jdbcType=DECIMAL}, #{paymenttime,jdbcType=TIMESTAMP},
+                #{paymenttype,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from payment
+        where userId = #{userid}
+        order by paymentTime desc
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from payment
+        order by paymentTime desc
+        limit #{begin}, #{size}
+    </select>
+
+    <select id="selectCount" resultType="int">
+        select count(*) from payment
+    </select>
+
+    <select id="selectCountBySearch" resultType="int">
+        select count(*)
+        from payment, user
+        where payment.userId = user.userId
+        <if test="username != null and username != '' ">
+            and userName like concat('%',#{username},'%')
+        </if>
+    </select>
+
+    <select id="selectBySearch" resultMap="BaseResultMap">
+        select paymentId, payment.borrowId, payment.userId, amount, paymentTime, paymentType, remark, userName
+        from payment, user
+        where payment.userId = user.userId
+        <if test="username != null and username != '' ">
+            and userName like concat('%',#{username},'%')
+        </if>
+        order by paymentTime desc
+        limit #{begin}, #{size}
+    </select>
+
+    <select id="checkPaymentExists" resultType="int">
+        select count(*)
+        from payment
+        where borrowId = #{borrowid}
+    </select>
+
+    <delete id="deleteByBorrowId">
+        delete from payment
+        where borrowId = #{borrowid}
+    </delete>
+
+</mapper>

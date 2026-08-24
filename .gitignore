@@ -1,0 +1,14 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.log
+
+# Build output
+target/
+dist/
+node_modules/
+
+# Maven wrapper (not used here)
+.mvn/
