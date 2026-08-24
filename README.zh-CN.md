@@ -44,8 +44,8 @@
 - **JDK 8**
 - **MySQL 8.0**（脚本可在 MySQL 8.0+ 运行）
 - **Redis**（任意版本，如 Redis 3.2，用于缓存）
-- **Node.js 14**（前端工具链基于 Node 14，例如 `D:\Node`）
-- **Maven 3.5**（例如 `D:\apache-maven-3.5.0`）
+- **Node.js 14**（前端工具链基于 Node 14）
+- **Maven 3.5**（使用 apache-maven-3.5.0）
 - **IntelliJ IDEA**（推荐用于后端开发）
 
 ### 步骤
