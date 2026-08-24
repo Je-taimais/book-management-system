@@ -221,9 +221,6 @@ book-management-system/
 <a id="截图"></a>
 ## 🖼️ 截图
 
-### 系统总览
-![系统总览](screenshots/基于vue图书管理系统.png)
-
 ### 登录
 ![登录](screenshots/登录.png)
 
