@@ -257,7 +257,6 @@ book-management-system/
 | `borrow` | 借阅 / 归还记录 |
 | `payment` | 罚款 / 缴费记录 |
 
-> `upgrade_stock.sql` 可为 `book_info` 可选地增加 `stock` 字段，用于记录可借库存。
 
 ---
 
