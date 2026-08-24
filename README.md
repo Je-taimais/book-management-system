@@ -44,8 +44,8 @@
 - **JDK 8**
 - **MySQL 8.0** (the dump runs on MySQL 8.0+)
 - **Redis** (any version, e.g. Redis 3.2; used for caching)
-- **Node.js 14** (the frontend toolchain targets Node 14 — e.g. `D:\Node`)
-- **Maven 3.5** (e.g. `D:\apache-maven-3.5.0`)
+- **Node.js 14** (the frontend toolchain targets Node 14)
+- **Maven 3.5** (use apache-maven-3.5.0`)
 - **IntelliJ IDEA** (recommended for the backend)
 
 ### Steps
@@ -257,7 +257,6 @@ The database `db_book` contains 5 tables:
 | `borrow` | Borrow / return records |
 | `payment` | Fine / payment records |
 
-> `upgrade_stock.sql` optionally adds a `stock` column to `book_info` for lendable inventory tracking.
 
 ---
 
